@@ -5644,4 +5644,55 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: -4,
 	},
+	// Vena's Custom Abilities
+  coldasice: {
+    onFoeTryMove(target, pokemon, move) {
+      // Check if the move is self-targeting and is a status move
+      if (move.target === 'self' && move.category === 'Status') {
+        const abilityHolder = this.effectState.target; // The Pokémon with the ability
+        this.add("-activate", abilityHolder, "ability: Cold as Ice");
+        this.add("-fail", target, "status", "[from] ability: Cold as Ice", "[of] " + abilityHolder);
+        return false;
+      }
+      return true;
+    },
+    name: "Cold as Ice",
+    rating: 4,
+    num: 500
+  },
+  engineofindustry: {
+    onAfterMove(pokemon, target, move) {
+      // Ensure the move exists, has a type, and is a damaging move (Physical or Special).
+      if (!move || !move.type || move.category === "Status") return;
+      const abilityHolder = this.effectState.target; // The Pokémon with the ability
+      // Check if the ability holder is the one using the move.
+      if (pokemon !== abilityHolder) return;
+      // Check if the move is Ground-Type.
+      if (move.type === 'Ground') {
+        // Boost the Special Defense stat by 1 stage.
+        this.boost({ spd: 1 }, abilityHolder, abilityHolder);
+      }
+      // Check if the move is Steel-Type.
+      else if (move.type === 'Steel') {
+        // Boost the Defense stat by 1 stage.
+        this.boost({ def: 1 }, abilityHolder, abilityHolder);
+      }
+    },
+    name: "Engine of Industry",
+    rating: 4,
+    num: 501
+  },
+  lethallegs: {
+    onBasePowerPriority: 23,
+    onBasePower(basePower, attacker, defender, move) {
+      if (move.flags["kick"]) {
+        this.debug("Lethal Legs boost");
+        return this.chainModify([4915, 4096]);
+      }
+    },
+    flags: {},
+    name: "Lethal Legs",
+    rating: 3,
+    num: 502
+  },
 };

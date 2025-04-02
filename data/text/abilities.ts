@@ -2268,4 +2268,20 @@ export const AbilitiesText: { [id: IDEntry]: AbilityText } = {
 
 		activate: "  [POKEMON] extends [MOVE] by 2 turns!",
 	},
+   // Vena's Custom Abilities
+   coldasice: {
+   	name: "Cold as Ice",
+      desc: "A heart of cold, hateful callousness prevents other Pokémon from using Self-Targeting Status Moves.",
+      shortDesc: "Prevents others from using Self-Targeting Status moves."
+   },
+   engineofindustry: {
+   	name: "Engine of Industry",
+   	desc: "Raises the Pokémon's Defense if it uses a Steel-Type move, raises Special Defense if it uses a Ground-Type Move.",
+   	shortDesc: "Raises Def if the Pokémon uses a Steel Move, Sp Def if Ground."
+   },
+   lethallegs: {
+   	name: "Lethal Legs",
+   	desc: "This Pokemon's kick-based attacks have their power multiplied by 1.2.",
+   	shortDesc: "This Pokemon's kick-based attacks have 1.2x power."
+   },
 };
